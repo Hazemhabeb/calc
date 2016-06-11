@@ -1,0 +1,9 @@
+/* Empty. Add your own CSS if you like */
+.display {
+    background-color: antiquewhite;
+}
+
+.display input {
+    font-size: x-large;
+    text-align: right; 
+}
