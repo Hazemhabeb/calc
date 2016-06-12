@@ -1,32 +1,47 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope) {
 })
 
 
 .controller('CalculatorCtrl', function($scope) {
-  
-  $scope.expression = '';
-  $scope.clear = clear;
-  $scope.input = input;
-  $scope.calculate = calculate;
-  
+  clear();
 
-  function input(value) {
-        if($scope.expression === '' || typeof($scope.expression) === 'undefined') {
-            $scope.expression = value;
-        } else {
-            $scope.expression = $scope.expression + '' + value;
-        }
-  }
+  $scope.clear = clear;
+  $scope.inputDigit = inputDigit;
+  $scope.inputOperator = inputOperator;
+  $scope.calculate = calculate;
+
 
   function clear() {
+    $scope.operand = 0;
     $scope.expression = '';
+    $scope.lastInputIsOperator = false;
   }
-  
-    function calculate(expression) {
-        $scope.expression = eval($scope.expression);
-    }  
 
-})
-;
+  function inputDigit(digit) {
+    if ($scope.lastInputIsOperator || ($scope.operand === 0 && digit !== 0)) {
+      $scope.operand = parseInt(digit, 10);
+    } else {
+      $scope.operand = ($scope.operand * 10) + parseInt(digit, 10);
+    }
+    $scope.lastInputIsOperator = false;
+  }
+
+  function inputOperator(operator) {
+    $scope.expression = $scope.expression + ' ' + $scope.operand + ' ' + operator;
+    $scope.lastInputIsOperator = true;
+  }
+
+  function calculate() {
+    $scope.expression = $scope.expression + ' ' + $scope.operand;
+
+    //console.log($scope.expression);
+    
+    $scope.operand = eval($scope.expression);
+    $scope.expression = $scope.operand;
+    $scope.lastInputIsOperator = false;
+    $scope.expression = '';
+  }  
+
+});

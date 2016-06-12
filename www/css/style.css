@@ -1,9 +1,12 @@
-/* Empty. Add your own CSS if you like */
-.display {
-    background-color: antiquewhite;
+.expression {
+    background-color: white;
+    font-size: small;
+    text-align: right;
+    height: 50px;     
 }
 
-.display input {
-    font-size: x-large;
+.display {
+    background-color: antiquewhite;
+    font-size: xx-large;
     text-align: right; 
 }
